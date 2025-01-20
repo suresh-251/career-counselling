@@ -10,7 +10,7 @@
             margin: 0;
             font-family: 'Poppins', sans-serif;
             background: url('ai-background.png') no-repeat center center / cover, 
-                        linear-gradient(to right, #6a11cb, #2575fc);
+                        linear-gradient(to left, #2575fc, #6a11cb);
             color: #fff;
             display: flex;
             flex-direction: column;
@@ -155,6 +155,46 @@
         .footer-icons img:hover {
             filter: grayscale(0%);
         }
+
+        /* Chat Icon and Frame Styles */
+        #chat-icon {
+            position: fixed;
+            bottom: 0px;
+            right: 30px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border:2px solid rgba(172, 175, 72, 0.84);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: transparent;
+        }
+
+        #chat-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        #chat-frame {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 400px;
+            height: 600px;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #chat-frame.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -181,6 +221,8 @@
         </div>
     </main>
 
+    
+
     <footer>
         <p>&copy; 2025 AI Career Counselor. All Rights Reserved.</p>
         <div class="footer-icons">
@@ -189,5 +231,25 @@
             <a href="#"><img src="{{ url_for('static', filename='linkedin.png') }}" alt="LinkedIn"></a>
         </div>
     </footer>
+    <!-- Chat icon -->
+    <div id="chat-icon">
+        <img src="{{ url_for('static', filename='logo-removebg-preview.png') }}" alt="Chatbot Icon">
+    </div>
+
+    <!-- Chat iframe -->
+    <iframe
+        id="chat-frame"
+        src="https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/01/18/16/20250118163646-PSOOTPNI.json"
+    ></iframe>
+
+    <script>
+        // Toggle chat iframe visibility
+        const chatIcon = document.getElementById('chat-icon');
+        const chatFrame = document.getElementById('chat-frame');
+
+        chatIcon.addEventListener('click', () => {
+            chatFrame.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
